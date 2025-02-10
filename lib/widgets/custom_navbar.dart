@@ -15,7 +15,7 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomAppBar(
       shape: CircularNotchedRectangle(),
-      notchMargin: 4.0,
+      notchMargin: 2.0,
       color: Color.fromRGBO(114, 49, 153, 1),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -32,7 +32,10 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem(IconData icon, String label, int index) {
     return InkWell(
+      highlightColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onTap: () => onItemTapped(index),
+      autofocus: false,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

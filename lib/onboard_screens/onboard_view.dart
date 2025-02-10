@@ -45,7 +45,6 @@ class _OnboardViewState extends State<OnboardView> {
         },
         itemBuilder: (context, index) {
           if (index == 3) {
-            // Custom Screen for Index 3
             return Column(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -162,7 +161,7 @@ class _OnboardViewState extends State<OnboardView> {
             );
           }
 
-          // Default Onboarding Pages
+          
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

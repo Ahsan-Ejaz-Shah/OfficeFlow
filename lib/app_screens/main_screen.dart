@@ -47,16 +47,18 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => IndexedStack(
-            index: controller.selectedIndex.value,
-            children: _screens,
-          )),
+      body: Obx(
+        () => IndexedStack(
+          index: controller.selectedIndex.value,
+          children: _screens,
+        ),
+      ),
       floatingActionButton: FloatingActionButton(
         shape: CircleBorder(),
         backgroundColor: Color.fromRGBO(114, 49, 153, 1),
         foregroundColor: Colors.white,
         onPressed: () {
-          // Action for the FAB
+      
           Get.to(() => AddExpense());
         },
         child: FaIcon(FontAwesomeIcons.plus),

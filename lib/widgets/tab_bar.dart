@@ -74,16 +74,22 @@ class _TabBarExampleState extends State<TabBarExample>
             borderRadius: BorderRadius.circular(24),
           ),
           child: TabBar(
+
             controller: _tabController,
             dividerColor: Colors.transparent,
+            labelPadding: EdgeInsets.all(width * 0.005),
+            overlayColor: MaterialStateProperty.all(Colors.transparent),
+          
             indicatorPadding: EdgeInsets.all(width * 0.015),
             indicatorSize: TabBarIndicatorSize.tab,
             labelStyle: GoogleFonts.inter(
               fontWeight: FontWeight.w700,
+              
             ),
             indicator: BoxDecoration(
               color: const Color.fromRGBO(114, 49, 153, 1),
               borderRadius: BorderRadius.circular(15),
+            
             ),
             labelColor: Colors.white,
             unselectedLabelColor: Colors.black,

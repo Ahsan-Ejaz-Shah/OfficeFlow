@@ -7,7 +7,6 @@ import 'package:officeflow/app_screens/splash_screen.dart';
 Future<void> main() async {
   await GetStorage.init();
   Get.put(AppController(), permanent: true);
-
   runApp(MyApp());
 }
 

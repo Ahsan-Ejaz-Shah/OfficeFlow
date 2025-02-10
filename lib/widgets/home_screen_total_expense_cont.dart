@@ -16,7 +16,7 @@ class HomeScreenTotalExpenseContainer extends StatelessWidget {
       child: Align(
         alignment: Alignment.topLeft,
         child: Container(
-          height: height * 0.13,
+          height: height * 0.10,
           width: width * 0.50,
           decoration: BoxDecoration(
             shape: BoxShape.rectangle,

@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: height * 0.005,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: width * 0.045),
+                      padding: EdgeInsets.only(left: width * 0.045, top: height * 0.025),
                       child: Align(
                         alignment: Alignment.topLeft,
                         child: Text(
@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: height * 0.030,
+                      height: height * 0.010,
                     ),
                     Obx(
                       () => ExpenseOverview(

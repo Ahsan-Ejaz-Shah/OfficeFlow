@@ -14,7 +14,7 @@ import 'package:officeflow/models/expense.dart';
 
 class ApiServices {
   final String baseUrl = "https://office-expense.webexert.us/api";
-  final secureStorage = FlutterSecureStorage();
+  final secureStorage = FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
   Future<Map<String, dynamic>> fetchCategorySummary() async {
     final url = Uri.parse('$baseUrl/summary');
     final token = await secureStorage.read(key: 'token_key');
@@ -80,7 +80,6 @@ class ApiServices {
 
       final response = await http.Response.fromStream(streamedResponse);
 
-      // Check response status
       if (response.statusCode >= 200 && response.statusCode < 300) {
         print('Profile updated successfully: ${response.body}');
       } else {
@@ -90,7 +89,7 @@ class ApiServices {
       return response;
     } catch (e) {
       print('Error updating profile: $e');
-      rethrow; // Re-throw the error to be handled upstream
+      rethrow;
     }
   }
 
@@ -509,8 +508,8 @@ class ApiServices {
   Future<void> logout() async {
     final storage = GetStorage();
     storage.erase();
-    await secureStorage.delete(key: "token_key");
+    await secureStorage.deleteAll();
 
-    Get.off(() => SignInScreen());
+    Get.offAll(() => SignInScreen());
   }
 }
