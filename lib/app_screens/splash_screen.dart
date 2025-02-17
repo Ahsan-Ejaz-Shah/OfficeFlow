@@ -31,38 +31,34 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
- void _navigateBasedOnOnboardingStatus() async {
+void _navigateBasedOnOnboardingStatus() async {
   final hasSeenOnboarding = await hasCompletedOnboarding();
+  
+  // Debugging: Print all stored keys
+  final allKeys = await secureStorage.readAll();
+  print("All Keys in Secure Storage: $allKeys");
+
   final token = await secureStorage.read(key: "token_key");
+  print("Retrieved Token: $token");
 
-  // Only navigate to MainScreen if the user has signed in (i.e., the token exists and is valid).
-  if (hasSeenOnboarding) {
-    if (token != null) {
-      // You can make an additional API call to verify token validity if needed
-      // Before navigating to MainScreen, check if the token is valid
-      final isLoggedIn = controller.isLoggedIn();
+  if (!hasSeenOnboarding) {
+    Get.offAll(() => OnboardView());
+    return;
+  }
 
-      if (isLoggedIn) {
-        Get.offAll(() => MainScreen());
-      } else {
-        // Token exists but is not valid, so show SignInScreen
-        Get.off(() => SignInScreen());
-      }
-    } else {
-      // If token doesn't exist, direct user to the SignInScreen
-      Get.off(() => SignInScreen());
-    }
+  if (token != null && token.isNotEmpty) {
+    Get.offAll(() => MainScreen());
   } else {
-    // If the onboarding has not been completed, show the Onboarding screen
-    Get.off(() => OnboardView());
+    Get.offAll(() => SignInScreen());
   }
 }
 
 
-  Future<bool> hasCompletedOnboarding() async {
-    SharedPreferences sp = await SharedPreferences.getInstance();
-    return sp.getBool('hasSeenOnboarding') ?? false;
-  }
+Future<bool> hasCompletedOnboarding() async {
+  SharedPreferences sp = await SharedPreferences.getInstance();
+  return sp.getBool('hasSeenOnboarding') ?? false;
+}
+
 
   @override
   Widget build(BuildContext context) {

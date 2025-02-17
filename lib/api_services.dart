@@ -14,7 +14,8 @@ import 'package:officeflow/models/expense.dart';
 
 class ApiServices {
   final String baseUrl = "https://office-expense.webexert.us/api";
-  final secureStorage = FlutterSecureStorage(aOptions: AndroidOptions(encryptedSharedPreferences: true));
+  final secureStorage =
+      FlutterSecureStorage(); //aOptions: AndroidOptions(encryptedSharedPreferences: true)
   Future<Map<String, dynamic>> fetchCategorySummary() async {
     final url = Uri.parse('$baseUrl/summary');
     final token = await secureStorage.read(key: 'token_key');
@@ -319,6 +320,7 @@ class ApiServices {
           final token = responseData['data']['token'];
 
           await secureStorage.write(key: "token_key", value: token);
+          print(token);
 
           return responseData;
         } else {
@@ -475,17 +477,14 @@ class ApiServices {
       final responseData = jsonDecode(response.body);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        if (responseData.containsKey('data') &&
-            responseData['data'].containsKey('token')) {
-          final token = responseData['data']['token'];
+        if (responseData.containsKey('data')) {
+          // responseData['data'].containsKey('token')
+          // final token = responseData['data']['token'];
 
-          await secureStorage.write(key: "token_key", value: token);
-          print("Token stored: $token");
+          // await secureStorage.write(key: "token_key", value: token);
+          // print("Token stored: $token");
 
-          final storedToken = await secureStorage.read(key: "token_key");
-          if (storedToken != null) {
-            Get.off(() => SignInScreen());
-          }
+          Get.off(() => SignInScreen());
 
           return {'success': true, 'message': "Signup successful"};
         } else {

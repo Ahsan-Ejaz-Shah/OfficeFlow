@@ -26,7 +26,7 @@ class ExpenseOverview extends StatelessWidget {
         children: [
           PieChart(
             PieChartData(
-              centerSpaceRadius: width * 0.17,
+              centerSpaceRadius: width * 0.20,
               sections: _generateChartSections(width),
             ),
           ),
@@ -35,14 +35,15 @@ class ExpenseOverview extends StatelessWidget {
             children: [
               Text(
                 totalValue.toString(),
+                
                 style: GoogleFonts.inter(
                   color: Color.fromRGBO(236, 18, 214, 1),
                   fontWeight: FontWeight.w600,
-                  fontSize: width * 0.060,
+                  fontSize: width * 0.030,
                 ),
               ),
               Text(
-                currency,
+                'PKR ${currency}',
                 style: GoogleFonts.inter(
                   color: Color.fromRGBO(0, 0, 0, 1),
                   fontWeight: FontWeight.w600,

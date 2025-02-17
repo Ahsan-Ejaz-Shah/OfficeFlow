@@ -335,6 +335,8 @@ class AppController extends GetxController {
         passwordController.text.trim(),
       );
 
+      print("API Response: $response"); // Debugging
+
       if (response.containsKey('data') &&
           response['data'].containsKey('user')) {
         final userData = response['data']['user'];
@@ -342,6 +344,16 @@ class AppController extends GetxController {
         final userNameFromApi = userData['name'] ?? "Unknown";
         final userEmailFromApi = userData['email'] ?? "Unknown";
         final userImageFromApi = userData['image'] ?? "";
+        final token = response['data']['token']; // Add this line
+
+        print("Token: $token"); // Debugging
+
+        if (token != null) {
+          storage.write('authToken', token); // Save token
+        } else {
+          Get.snackbar("Error", "Token is missing!",
+              backgroundColor: Colors.red);
+        }
 
         storage.write('userName', userNameFromApi);
         storage.write('userEmail', userEmailFromApi);
